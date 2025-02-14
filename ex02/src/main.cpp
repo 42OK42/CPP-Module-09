@@ -16,7 +16,7 @@ void runTests()
 {
 	std::cout << "\nRunning predefined tests..." << std::endl;
 	
-	// Test 1: Simple sequence
+	//  Test 1: Simple sequence
 	{
 		std::cout << "\nTest 1: Simple sequence" << std::endl;
 		char* args[] = {(char*)"./PmergeMe", (char*)"3", (char*)"5", (char*)"9", (char*)"7", (char*)"4"};
