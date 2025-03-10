@@ -6,14 +6,14 @@
 /*   By: okrahl <okrahl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 13:45:01 by okrahl            #+#    #+#             */
-/*   Updated: 2025/01/16 12:30:17 by okrahl           ###   ########.fr       */
+/*   Updated: 2025/03/10 15:15:02 by okrahl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PMERGEME_HPP
 #define PMERGEME_HPP
 
-#include <list>
+#include <vector>
 #include <deque>
 #include <iostream>
 #include <ctime>
@@ -26,9 +26,9 @@
 
 class PmergeMe {
 private:
-	std::list<int> _list;
+	std::vector<int> _vector;
 	std::deque<int> _deque;
-	double _listTime;
+	double _vectorTime;
 	double _dequeTime;
 	
 public:
@@ -43,11 +43,13 @@ public:
 	void displayAfter() const;
 	
 private:
-	void sortList();
+	void sortVector();
 	void sortDeque();
-	void mergeInsertList(std::list<int>& lst);
+	void mergeInsertVector(std::vector<int>& vec);
 	void mergeInsertDeque(std::deque<int>& dq);
 	bool isPositiveNumber(const std::string& str) const;
+	int jacobsthalNumber(int n) const;
+	std::vector<int> generateJacobsthalInsertionOrder(int n) const;
 };
 
 #endif 

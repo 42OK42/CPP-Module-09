@@ -6,7 +6,7 @@
 #    By: okrahl <okrahl@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/07 12:51:30 by okrahl            #+#    #+#              #
-#    Updated: 2025/01/16 12:56:41 by okrahl           ###   ########.fr        #
+#    Updated: 2025/03/10 14:40:35 by okrahl           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME		= PmergeMe
 CC			= c++
 CFLAGS		= -Wall -Wextra -Werror -std=c++98
 
-DEBUG		= 0
+DEBUG		= 1
 
 
 ifeq ($(DEBUG),1)
