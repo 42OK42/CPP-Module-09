@@ -6,7 +6,7 @@
 /*   By: okrahl <okrahl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 12:27:12 by okrahl            #+#    #+#             */
-/*   Updated: 2025/03/10 15:37:28 by okrahl           ###   ########.fr       */
+/*   Updated: 2025/03/17 13:19:25 by okrahl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,35 +116,48 @@ std::vector<int> PmergeMe::generateJacobsthalInsertionOrder(int n) const
 	std::vector<int> result;
 	if (n <= 0) return result;
 	
-	// Add the first position (always 1)
-	result.push_back(1);
+	// Berechne alle benötigten Jacobsthal-Zahlen
+	std::vector<int> jacobsthalNumbers;
+	jacobsthalNumbers.push_back(0);  // J(0) = 0
+	jacobsthalNumbers.push_back(1);  // J(1) = 1
 	
-	// Calculate how many Jacobsthal numbers we need
-	int jacobsthalIndex = 3; // Start with J(3) = 3
-	int currentJacobsthal = 3;
-	
-	while (currentJacobsthal <= n)
-	{
-		// Add the current Jacobsthal position
-		result.push_back(currentJacobsthal);
-		
-		// Add all positions between the previous and current Jacobsthal number
-		// (in descending order)
-		int prevJacobsthal = jacobsthalNumber(jacobsthalIndex - 1);
-		for (int i = currentJacobsthal - 1; i > prevJacobsthal; i--)
-		{
-			if (i <= n) result.push_back(i);
-		}
-		
-		// Calculate the next Jacobsthal number
-		jacobsthalIndex++;
-		currentJacobsthal = jacobsthalNumber(jacobsthalIndex);
+	int i = 2;
+	while (jacobsthalNumbers.back() < n) {
+		int next = jacobsthalNumbers[i-1] + 2 * jacobsthalNumbers[i-2];
+		jacobsthalNumbers.push_back(next);
+		i++;
 	}
 	
-	// Add the remaining positions
-	for (int i = n; i > currentJacobsthal && i > 0; i--)
-	{
-		result.push_back(i);
+	// Erstelle die Einfügereihenfolge
+	std::vector<bool> used(n + 1, false);
+	
+	// Füge zuerst 1 ein (immer der erste)
+	result.push_back(1);
+	used[1] = true;
+	
+	// Füge dann die restlichen Elemente gemäß der Jacobsthal-Reihenfolge ein
+	for (size_t j = 3; j < jacobsthalNumbers.size(); j++) {
+		// Füge die Jacobsthal-Position ein
+		int pos = jacobsthalNumbers[j];
+		if (pos <= n && !used[pos]) {
+			result.push_back(pos);
+			used[pos] = true;
+		}
+		
+		// Füge alle Positionen zwischen der aktuellen und vorherigen Jacobsthal-Zahl ein
+		for (int k = pos - 1; k > jacobsthalNumbers[j-1]; k--) {
+			if (k <= n && !used[k]) {
+				result.push_back(k);
+				used[k] = true;
+			}
+		}
+	}
+	
+	// Füge alle verbleibenden Positionen ein
+	for (int j = 1; j <= n; j++) {
+		if (!used[j]) {
+			result.push_back(j);
+		}
 	}
 	
 	return result;
