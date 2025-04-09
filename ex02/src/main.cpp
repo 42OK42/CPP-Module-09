@@ -6,7 +6,7 @@
 /*   By: okrahl <okrahl@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 12:27:12 by okrahl            #+#    #+#             */
-/*   Updated: 2025/01/16 12:31:09 by okrahl           ###   ########.fr       */
+/*   Updated: 2025/04/08 12:54:45 by okrahl           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void runTests()
 	//  Test 1: Simple sequence
 	{
 		std::cout << "\nTest 1: Simple sequence" << std::endl;
-		char* args[] = {(char*)"./PmergeMe", (char*)"3", (char*)"5", (char*)"9", (char*)"7", (char*)"4"};
+		char* args[] = {(char*)"./PmergeMe", (char*)"3", (char*)"5", (char*)"9", (char*)"7", (char*)"4",(char*)"8", (char*)"2", (char*)"1", (char*)"6", (char*)"10"};
 		PmergeMe sorter;
-		sorter.parseInput(6, args);
+		sorter.parseInput(11, args);
 		sorter.displayBefore();
 		sorter.sort();
 		sorter.displayAfter();
